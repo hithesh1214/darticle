@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { LoginContext } from "./helper/Context";
+import { Routes, Route } from "react-router-dom";
+import SingUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import TitlePage from "./pages/TitlePage";
+import Dashboard from "./pages/Dashboard";
+// import Protectedroutes from "./helper/Protectedroutes";
 
 function App() {
+  const [loginStatus, setLoginStatus] = React.useState(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoginContext.Provider value={{ loginStatus, setLoginStatus }}>
+      <Routes>
+        <Route exact path="/" element={<TitlePage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SingUp />} />
+        <Route path="/dashboard/*" element={<Dashboard />}></Route>
+        {/* <Protectedroutes
+          path="/dashboard"
+          component={Dashboard}
+          isAuth={loginStatus}
+        ></Protectedroutes> */}
+      </Routes>
+    </LoginContext.Provider>
   );
 }
 
