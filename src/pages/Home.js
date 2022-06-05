@@ -11,7 +11,7 @@ function Home() {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((response) => {
-        console.log(response.data[0]);
+        // console.log(response.data[0]);
         setarticles(response.data);
       });
   }, []);
